@@ -2,6 +2,7 @@
     "name": "amegatron/cryptoapi",
     "description": "Provides classes for implementing encrypted API with the client software",
     "keywords": ["laravel", "cryptography", "rsa", "aes", "api"],
+    "license": "DBAD",
     "authors": [
         {
             "name": "Aleksandr Egorov",
