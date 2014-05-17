@@ -141,4 +141,4 @@ Note that `postChecklicense` does not bother on encrypting outgoing data. For th
 
 Note also, that this filter is applied to all controller methods except `postInit` as I stated earlier - the output of this method should not be encrypted.
 
-See `Amegatron\Cryptoapi\Filters\OutgoingCryptFilter.php` if you are curious about what and how it does encryption and signing.
+See `Amegatron\Cryptoapi\Filters\OutgoingCryptFilter.php` if you are curious about how it does encryption and signing.
