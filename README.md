@@ -144,4 +144,4 @@ See `Amegatron\Cryptoapi\Filters\OutgoingCryptFilter.php` if you are curious abo
 
 # Client-side example #
 
-I'll provide a link to my C# exmaple implementation later
+Here is a C# example of client: https://github.com/Amegatron/CryptoApiExample
