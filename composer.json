@@ -20,10 +20,5 @@
             "Amegatron\\Cryptoapi\\": "src/"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "stable": "1.0"
-        }
-    },
     "minimum-stability": "stable"
 }
