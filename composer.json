@@ -1,6 +1,7 @@
 {
     "name": "amegatron/cryptoapi",
     "description": "Provides classes for implementing encrypted API with the client software",
+    "keywords": ["cryptography", "rsa", "aes", "api"],
     "authors": [
         {
             "name": "Amegatron",
@@ -17,6 +18,11 @@
         ],
         "psr-0": {
             "Amegatron\\Cryptoapi\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "stable": "1.0"
         }
     },
     "minimum-stability": "stable"
