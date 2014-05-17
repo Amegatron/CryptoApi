@@ -48,3 +48,40 @@ By defalt, key size is 1024, but you can override the default value by specifyin
 ## Implementing server-side API ##
 
 Now everything is ready for writing your API.
+
+For simplicity, I'll sugest all server API logic will be within a single controller, called ApiController. So, create `ApiController.php` in `app/controllers` and create a route for it in `app/routes.php`:
+
+`Route::controller('api', 'ApiController');`
+
+As you may have guessed, all our encrypted interaction will be directed to `http://youdomain.com/api`.
+
+Now, let's start implementing the controller.
+
+First, we will need to implemtnt points 3 and 4 from the alogithm, listed at the beginning. The key for AES algorithm consists of two parts: `key` and `iv`. Both should be sent to `/api/init` using POST for example.
+
+For this I suggest the following code:
+
+```
+    public function postInit() {
+        if (!(Input::has('key') && Input::has('iv'))) {
+            return 'ERROR 1';
+        }
+        
+        $crypt = App::make('CryptographyInterface');
+
+        extract(Input::only('key', 'iv'));
+        $key = $this->crypt->asymmetricDecrypt($key);
+        $iv = $this->crypt->asymmetricDecrypt($iv);
+
+        if (!($key && $iv)) {
+            return 'ERROR 2';
+        }
+
+        $this->crypt->initSymmetric(array(
+            'key'   => $key,
+            'iv'    => $iv,
+        ));
+
+        return 'OK';
+    }
+```
