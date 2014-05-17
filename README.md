@@ -141,3 +141,7 @@ public function __construct() {
 Note also, that this filter is applied to all controller methods except `postInit` as I stated earlier - the output of this method should not be encrypted.
 
 See `Amegatron\Cryptoapi\Filters\OutgoingCryptFilter.php` if you are curious about how it does encryption and signing.
+
+# Client-side example #
+
+I'll provide a link to my C# exmaple implementation later
