@@ -64,28 +64,28 @@ First, we will need to implemtnt points 3 and 4 from the alogithm, listed at the
 For this I suggest the following code:
 
 ```
-    public function postInit() {
-        if (!(Input::has('key') && Input::has('iv'))) {
-            return 'ERROR 1';
-        }
-        
-        $crypt = App::make('CryptographyInterface');
-
-        extract(Input::only('key', 'iv'));
-        $key = $crypt->asymmetricDecrypt($key);
-        $iv = $crypt->asymmetricDecrypt($iv);
-
-        if (!($key && $iv)) {
-            return 'ERROR 2';
-        }
-
-        $crypt->initSymmetric(array(
-            'key'   => $key,
-            'iv'    => $iv,
-        ));
-
-        return 'OK';
+public function postInit() {
+    if (!(Input::has('key') && Input::has('iv'))) {
+        return 'ERROR 1';
     }
+
+    $crypt = App::make('CryptographyInterface');
+
+    extract(Input::only('key', 'iv'));
+    $key = $crypt->asymmetricDecrypt($key);
+    $iv = $crypt->asymmetricDecrypt($iv);
+
+    if (!($key && $iv)) {
+        return 'ERROR 2';
+    }
+
+    $crypt->initSymmetric(array(
+        'key'   => $key,
+        'iv'    => $iv,
+    ));
+
+    return 'OK';
+}
 ```
 
 What should be noted here? First, creation of `$crpyt` object through Laravel IoC. Currently, it creates `Amegatron\Cryptoapi\Cryptography\RsaAesCryptography` object which implements an interface `Amegatron\Cryptoapi\Cryptography\CryptographyIterface`. This object contains all methods we will need for encryption, decryption and signing.
@@ -103,36 +103,35 @@ Before we continue coding, I should remind, that all data comming from the clien
 Lets create a method for `api/checklicense` route:
 
 ```
-    public function postChecklicense() {
-    
-        $licenseKey = DecryptedInput::get('licenseKey');
-        
-        // Perform some logic to determine whether the received license key is valid or has not expired for example
-        // Most probably retreiving this info from database.
-        $licenseIsValid     = true;
-        $licenseExpiresAt   = '2014-12-31 23:59:59';
-        
-        $response = array(
-            'isValid'   => $licenseIsValid,
-            'liceseExpiresAt'   => $licenseExpiresAt;
-        );
-        
-        return $response;
-    }
+public function postChecklicense() {
+
+    $licenseKey = DecryptedInput::get('licenseKey');
+
+    // Perform some logic to determine whether the received license key is valid or has not expired for example
+    // Most probably retreiving this info from database.
+    $licenseIsValid     = true;
+    $licenseExpiresAt   = '2014-12-31 23:59:59';
+
+    $response = array(
+        'isValid'   => $licenseIsValid,
+        'liceseExpiresAt'   => $licenseExpiresAt;
+    );
+
+    return $response;
+}
 ```
 
 Note that `postChecklicense` does not bother on encrypting outgoing data. For this we will use premade `cryptOut` filter, mentioned earlier. For this, let's create a constructor for our api controller:
 
 ```
-    public function __construct() {
-        $this->afterFilter(
-            'cryptOut',
-            array(
-                'except'   => array('postInit'),
-            )
-        );
-    }
-
+public function __construct() {
+    $this->afterFilter(
+        'cryptOut',
+        array(
+            'except'   => array('postInit'),
+        )
+    );
+}
 ```
 
 `cryptOut` filter does two things: first, it encrypts the outgoing data; secondly, it signs the data. Summarizing, it sends ot the client JSON-encoded object with two fields:
