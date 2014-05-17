@@ -39,7 +39,9 @@ class GenerateKeyPairCommand extends Command {
 	public function fire()
 	{
 		$keySize = $this->option('keySize');
-        $method = $this->option('method');
+
+        // openssl is not working now
+        $method = 'php';
 
         switch($method) {
             case 'php':
@@ -85,7 +87,7 @@ class GenerateKeyPairCommand extends Command {
 	{
         return array(
             array('keySize', null, InputOption::VALUE_OPTIONAL, 'Key size', 1024),
-            array('method', null, InputOption::VALUE_OPTIONAL, 'Key generation method', 'openssl'),
+            //array('method', null, InputOption::VALUE_OPTIONAL, 'Key generation method', 'php'),
         );
     }
 

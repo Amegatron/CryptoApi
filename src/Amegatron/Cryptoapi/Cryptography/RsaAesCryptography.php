@@ -100,7 +100,7 @@ class RsaAesCryptography implements CryptographyInterface {
      */
     public function asymmetricDecrypt($data) {
         if (!$this->isRsaInitialized) {
-            $this->initRsa();
+            $this->initAsymmetric();
         }
 
         return $this->rsa->decrypt(Base64::UrlDecode($data));
@@ -113,7 +113,7 @@ class RsaAesCryptography implements CryptographyInterface {
      */
     public function asymmetricEncrypt($data) {
         if (!$this->isRsaInitialized) {
-            $this->initRsa();
+            $this->initAsymmetric();
         }
 
         return Base64::UrlEncode($this->rsa->encrypt($data));
@@ -127,7 +127,7 @@ class RsaAesCryptography implements CryptographyInterface {
      */
     public function sign($data) {
         if (!$this->isRsaInitialized) {
-            $this->initRsa();
+            $this->initAsymmetric();
         }
 
         if (!function_exists('openssl_sign')) {
@@ -149,7 +149,7 @@ class RsaAesCryptography implements CryptographyInterface {
      */
     public function symmetricEncrypt($data) {
         if (!$this->isAesInitialized) {
-            $this->initAes();
+            $this->initSymmetric();
         }
 
         return $this->aes->encrypt($data);
@@ -162,7 +162,7 @@ class RsaAesCryptography implements CryptographyInterface {
      */
     public function symmetricDecrypt($data) {
         if (!$this->isAesInitialized) {
-            $this->initAes();
+            $this->initSymmetric();
         }
 
         return $this->aes->decrypt($data);

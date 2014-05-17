@@ -64,7 +64,7 @@ class CryptoapiServiceProvider extends ServiceProvider {
 
     protected function registerCryptography() {
         $this->app['CryptographyInterface'] = $this->app->share(function() {
-           return new Amegatron\Cryptoapi\Cryptography\RsaAesCryptography;
+           return new Cryptography\RsaAesCryptography;
         });
 
         $this->app['decryptedinput'] = $this->app->share(function() {
