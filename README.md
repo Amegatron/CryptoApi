@@ -70,14 +70,14 @@ For this I suggest the following code:
         $crypt = App::make('CryptographyInterface');
 
         extract(Input::only('key', 'iv'));
-        $key = $this->crypt->asymmetricDecrypt($key);
-        $iv = $this->crypt->asymmetricDecrypt($iv);
+        $key = $crypt->asymmetricDecrypt($key);
+        $iv = $crypt->asymmetricDecrypt($iv);
 
         if (!($key && $iv)) {
             return 'ERROR 2';
         }
 
-        $this->crypt->initSymmetric(array(
+        $crypt->initSymmetric(array(
             'key'   => $key,
             'iv'    => $iv,
         ));
