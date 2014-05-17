@@ -32,6 +32,10 @@ After that run `composer update` in console and ensure the packaged has been dow
 
 After the package has been successfully downloaded, you should register its Service Provider. To do so, add the following element in your "providers" section of `app/config/app.php`: `'Amegatron\Cryptoapi\CryptoapiServiceProvider',`
 
+Also you must "regster" an outgoing encryption filter, provided by the package. Add the following in `app/filters.php`:
+
+`Route::filter('cryptOut', 'Amegatron\Cryptoapi\Filters\OutgoingCryptFilter');`
+
 ## Generating key-pair ##
 
 Next, you need to generate a key-pair for asymmetric encryption. To do so, run the following command in console:
