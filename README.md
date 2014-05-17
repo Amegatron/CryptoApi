@@ -31,3 +31,16 @@ Add the following to composer.json of your Laravel project: ???
 After that run `composer update` in console and ensure the packaged has been downloaded.
 
 After the package has been successfully downloaded, you should register its Service Provider. To do so, add the following element in your "providers" section of `app/config/app.php`: `'Amegatron\Cryptoapi\CryptoapiServiceProvider',`
+
+## Generating key-pair ##
+
+Next, you need to generate a key-pair for asymmetric encryption. To do so, run the following command in console:
+`php artisan cryptoapi:generatekeys`
+
+By default, two files will be created in `app/keys` folder: `private.key` and `public.crt`. `public.crt` is only needed by the client, so it may be deleted after you've embedded it in your client software. But `private.key` should be kept secure. As your server is pointing to `public` folder of your web-site, this file is not accessible over internet. And it should not be. never. Keep this file a secret. Nobody should now this key except your server.
+
+By defalt, key size is 1024, but you can override the default value by specifying `--keySize=XXXX` option to the above artisan command. But 1024 is pretty enough for most cases. Also, I didn't manage to generate 2048-size key -- it took too long time for me and I cancelled the process :)
+
+## Implementing server-side API ##
+
+Now everything is ready for writing your API.
