@@ -27,7 +27,7 @@ The algorithm is based on two cryptography algorithms: symmetric and asymmetric.
 ## Package installation ##
 
 Add the following to composer.json of your Laravel project in the "require" section:
-`"amegatron/cryptoapi": "dev-master"`
+`"amegatron/cryptoapi": "1.0.*"`
 
 After that run `composer update` in console and ensure the packaged has been downloaded.
 
