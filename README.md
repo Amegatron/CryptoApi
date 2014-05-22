@@ -26,7 +26,8 @@ The algorithm is based on two cryptography algorithms: symmetric and asymmetric.
 
 ## Package installation ##
 
-Add the following to composer.json of your Laravel project: ???
+Add the following to composer.json of your Laravel project in the "require" section:
+`"amegatron/cryptoapi": "dev-master"`
 
 After that run `composer update` in console and ensure the packaged has been downloaded.
 
@@ -98,7 +99,7 @@ Also note that responses from `/api/init` are not encrypted (for the case if thi
 
 For demonstrating purposes, let's assume that purpose of our server application is to validate client's licenses: the client sends a license key to server, and the server responses, telling, whether this license key is valid and further use of client software is allowed.
 
-Before we continue coding, I should remind, that all data comming from the client is encrypted (using AES). For the purpose of convinient decrypting incoming data, I implemented `DecryptedInput` Facade, which is almost the same as Laravel's `Input` Facade except that it allows to get decrypted values from the request.
+Before we continue coding, I should remind, that all data comming from the client is encrypted (using AES). For the purpose of convinient decrypting incoming data, I implemented `DecryptedInput` Facade, which is almost the same as Laravel's `Input` Facade except that it allows to get decrypted values from the request. You do not have to worry about adding an alias to `DecryptedInput` - it is added automatically in the package Server Provider for you.
 
 Lets create a method for `api/checklicense` route:
 
