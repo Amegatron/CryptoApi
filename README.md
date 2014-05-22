@@ -95,6 +95,8 @@ Second, is the initialization of symmetric "driver" (`$crypt->initSymmetric(...)
 
 Also note that responses from `/api/init` are not encrypted (for the case if this initialization fails). Also, response messages are not "speaking". The client should know what does e.g. "ERROR 1" means. This is done for not telling the possible hacker the internals of the API.
 
+And lastly, if the following code suites you, you may just use pre-made trait for this, `RsaAesControllerTrait` which alread has this `postInit` method.
+
 ### Application-specific API ###
 
 For demonstrating purposes, let's assume that purpose of our server application is to validate client's licenses: the client sends a license key to server, and the server responses, telling, whether this license key is valid and further use of client software is allowed.
