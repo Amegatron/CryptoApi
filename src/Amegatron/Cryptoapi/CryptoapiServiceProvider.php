@@ -71,7 +71,9 @@ class CryptoapiServiceProvider extends ServiceProvider {
             return new DecryptedInput();
         });
 
-        AliasLoader::getInstance()->alias('DecryptedInput', 'Amegatron\Cryptoapi\Facades\DecryptedInput');
+        $aliasLoader = AliasLoader::getInstance();
+        $aliasLoader->alias('DecryptedInput', 'Amegatron\Cryptoapi\Facades\DecryptedInput');
+        $aliasLoader->alias('RsaAesControllerTrait', 'Amegatron\Cryptoapi\Traits\RsaAesControllerTrait');
     }
 
 	/**
