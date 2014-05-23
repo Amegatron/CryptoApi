@@ -27,11 +27,13 @@ The algorithm is based on two cryptography algorithms: symmetric and asymmetric.
 ## Package installation ##
 
 Add the following to composer.json of your Laravel project in the "require" section:
-`"amegatron/cryptoapi": "dev-master"`
+`"amegatron/cryptoapi": "1.0.*"`
 
 After that run `composer update` in console and ensure the packaged has been downloaded.
 
-After the package has been successfully downloaded, you should register its Service Provider. To do so, add the following element in your "providers" section of `app/config/app.php`: `'Amegatron\Cryptoapi\CryptoapiServiceProvider',`
+In case you are using `rtablada/package-installer` you can run `php artisan package:install amegatron/cryptoapi` to automatically add package's Service Provider to application config.
+
+If you don't use the above package, you should register the Service Provider manually. To do so, add the following element in your "providers" section of `app/config/app.php`: `'Amegatron\Cryptoapi\CryptoapiServiceProvider',`
 
 Also you must "regster" an outgoing encryption filter, provided by the package. Add the following in `app/filters.php`:
 
