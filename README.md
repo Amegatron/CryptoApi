@@ -97,7 +97,18 @@ Second, is the initialization of symmetric "driver" (`$crypt->initSymmetric(...)
 
 Also note that responses from `/api/init` are not encrypted (for the case if this initialization fails). Also, response messages are not "speaking". The client should know what does e.g. "ERROR 1" means. This is done for not telling the possible hacker the internals of the API.
 
-And lastly, if the following code suites you, you may just use pre-made trait for this, `RsaAesControllerTrait` which alread has this `postInit` method.
+And lastly, if the following code suites you, you may just use pre-made trait for this, `Amegatron\Cryptoapi\Traits\RsaAesControllerTrait` which already has this `postInit` method.
+
+```
+use Amegatron\Cryptoapi\Traits\RsaAesControllerTrait;
+```
+
+Or if you are too lazy or your IDE does not insert the full name of the Trait automatically, you can just
+```
+use RsaAesControllerTrait;
+```
+The alias for the trait is registered in the package Service Provider.
+
 
 ### Application-specific API ###
 
