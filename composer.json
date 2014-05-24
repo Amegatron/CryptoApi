@@ -13,6 +13,10 @@
         "php": ">=5.3.7",
         "illuminate/support": "4.1.*"
     },
+    "require-dev": {
+        "codeception/codeception": "*",
+        "guzzle/plugin": "*"
+    },
     "autoload": {
         "psr-0": {
             "Amegatron\\Cryptoapi\\": "src/"

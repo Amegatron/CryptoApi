@@ -21,7 +21,7 @@ class DecryptedInput {
     protected $decryptedParams = array();
 
     /**
-     * @var Amegatron\Cryptoapi\Cryptography\CryptographyInterface
+     * @var \Amegatron\Cryptoapi\Cryptography\CryptographyInterface
      */
     protected $crypt;
 
