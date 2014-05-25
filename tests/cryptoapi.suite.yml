@@ -1,0 +1,8 @@
+class_name: CryptoApiGuy
+modules:
+    enabled: [PhpBrowser, REST, CryptoApiHelper]
+    config:
+      PhpBrowser:
+          url: http://localhost:8000/
+      REST:
+          url: http://localhost:8000/api/
