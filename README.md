@@ -161,3 +161,65 @@ See `Amegatron\Cryptoapi\Filters\OutgoingCryptFilter.php` if you are curious abo
 # Client-side example #
 
 Here is a C# example of client: https://github.com/Amegatron/CryptoApiExample
+
+# Testing your CryptoApi #
+
+You can test CryptoApi using [CodeCeption](http://codeception.com/). I have provided a demo test, which tests a simple "echo" api method: the test sends encrypted `message` to server and expects to receive it in response, also encrypted and signed.
+
+To run this test you need to to the following:
+
+## Prerequisites ##
+
+You need to add the following to your `composer.json`:
+
+```
+    "require-dev": {
+        "codeception/codeception": "1.8.5",
+        "guzzle/plugin": "3.9.1"
+    },
+```
+
+After that run `composer update` command in console. This will install CodeCeption itself and additionally `guzzle/plugin`, which is needed for tests.
+
+## Server API ##
+
+Make sure you have an `ApiController` as described earlier. For this test this controller must have two methods: `postInit` and `postTestEcho`. For this you may simply use pre-made Traits:
+
+```
+class ApiController extends BaseController {
+
+    use \Amegatron\Cryptoapi\Traits\RsaAesControllerTrait;
+    use \Amegatron\Cryptoapi\Traits\TestsControllerTrait;
+
+}
+```
+
+Also make sure you have a corresponding `api` route to this controller and also a `cryptOut` filter (as described earlier).
+
+## Keys ##
+
+If you haven't done it already, generate a key-pair: `php artisan cryptoapi:generatekeys`.
+
+## Running the test ##
+
+### Starting the server ###
+
+First make sure you are the root folder of yout project (where `composer.json` and `artisan` lie).
+
+After that start the server: `php artisan serve &`. It will start the server on port 8000. It may take a while, just wait for the message saying the server has started.
+
+### The test ###
+
+Now cd to the package directory: `cd vendor/amegatron/cryptoapi`.
+
+Now you can run the test. Execute the following command: `../..bin/codecapt run` and wait until it finishes.
+
+If you did everything correctly, you should see green message at the end:
+
+> OK (1 test, 6 assertions)
+
+## Making your own tests ##
+
+If you are new to CodeCeption, visit its official website: http://codeception.com/
+
+For now I can't provide any kind of API for using in tests, but you should investigate existing test `tests/cryptoapi/CheckEchoCept.php` and a helper class it uses: `tests/_helpers/CryptoApiHelper.php`. There you can find the implementation of cryptographic algorithms used by the test using `phpseclib`, which comes with Laravel out of the box.
