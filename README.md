@@ -133,7 +133,7 @@ public function postChecklicense() {
         'liceseExpiresAt'   => $licenseExpiresAt;
     );
 
-    return $response;
+    return json_encode($response);
 }
 ```
 
